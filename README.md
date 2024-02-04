@@ -19,7 +19,8 @@ This application allows users to set price alerts for cryptocurrencies. When the
 ```http://localhost:5000```
 
 ### Endpoints
-#### There are  
+Once a user signs up or logs into the system, the following functionalities are implemented.
+#### There are following things implemented using JWT token. 
 1. REST API endpoint for the user’s to create an alert `alerts/create/`
 2. REST API endpoint for the user’s to delete an alert `alerts/delete/`
 3. REST API endpoint to fetch all the alerts that the user has created along with the included filter options based on the status of the alerts, paginated the response and status of the alerts as (created/deleted/triggered).
