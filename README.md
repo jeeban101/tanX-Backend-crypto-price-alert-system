@@ -1,7 +1,7 @@
-# tanX-Assignment-price-alert
+# tanX-Backend-Assignment-price-alert
 
 This application allows users to set price alerts for cryptocurrencies. When the target price is achieved, the user receives an email notification. The application is built using Flask, SQLAlchemy, and WebSocket for real-time price updates.
-
+Assignmnet By: Jeeban Bhagat(20BIT0441), VIT, Vellore
 ## Getting Started
 
 ### Prerequisites
