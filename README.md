@@ -223,17 +223,57 @@ When the WebSocket receives real-time price updates for cryptocurrencies, it che
 1. **WebSocket Handling:**
    - The WebSocket continuously receives real-time price updates from the Binance WebSocket (`wss://stream.binance.com/ws`).
    - Upon receiving an update, it extracts relevant information such as the coin symbol and current price.
+   - WebSocket setup in on_open function:
+     ```python
+     SOCK_URL = f"wss://stream.binance.com/ws"
 
+      WEB_SOCKET = websocket.WebSocketApp(SOCK_URL, on_open=on_open, on_close=on_close, on_message=on_message, on_error=on_error)
+      
+      wsThread = threading.Thread(target=WEB_SOCKET.run_forever)
+      wsThread.daemon = True
+      wsThread.start()
+      ```
+   - Handling WebSocket messages in on_message function:
+     ```python
+         def on_message(ws, message):
+          data = json.loads(message)
+          reqMsg = {"coin": data["s"][:-4].upper(), "price": float(data["k"]["c"])}
+      
+          # Additional code for handling alerts and user emails (see step 2 and 3)
+     ```
 2. **Alert Matching:**
    - The extracted information is then compared with the active alerts stored in the database.
    - For each active alert that matches the conditions (coin symbol and target price), the alert is marked as triggered, and the user is identified.
+   - Querying for satisfying alerts in on_message function:
+      ```python
+         satisfyingAlerts = Alert.query.filter(Alert.status == 'created', Alert.coin == reqMsg["coin"], Alert.target_price <= reqMsg["price"]).all()
+     ```
+   - Updating alert status to 'triggered' in on_message function:
+   ```python
+      for alert in satisfyingAlerts:
+          alert.status = 'triggered'
+   ```
 
-3. **User Identification:**
+4. **User Identification:**
    - The system retrieves the user details associated with the triggered alert, including their email address.
+   - Retrieving user details associated with the triggered alert in on_message function:
+     ```python
+        userDetails = []
 
-4. **Email Notification:**
+      for alert in satisfyingAlerts:
+          userDetails.append({'email': User.query.filter(User.id == alert.user_id).first().email,'coin': reqMsg["coin"], 'price': reqMsg["coin"]})
+     ```
+
+5. **Email Notification:**
    - The system sends an email notification to the identified user, informing them that their specified coin has reached the target price.
    - The email contains a message thanking the user and providing details about the triggered alert.
+   -Sending email notifications in on_message function:
+   ```python
+      for user_detail in userDetails:
+          email_value = user_detail['email']
+          coin_name = user_detail['coin']
+          send_email(email_value, coin_name, s)
+   ```
 
 ### Email Configuration
 
