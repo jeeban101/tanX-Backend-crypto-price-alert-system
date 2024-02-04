@@ -65,7 +65,7 @@ This application allows users to set price alerts for cryptocurrencies. When the
 - **Description:** Fetches alerts for the authenticated user based on the specified status (e.g., created, deleted, triggered).
 
 # API Documentation
-
+These apis were successfully test using postman during development process. The database model dump file is uploaded for successfull composing of docker inorder to run this project.
 ## Endpoints
 
 ### 1. User Signup
@@ -256,6 +256,36 @@ The email sent to users when their alert is triggered has the following structur
 - The WebSocket runs in a separate thread (`wsThread`) and establishes a connection to the Binance WebSocket for real-time price updates.
 - The Flask application manages user alerts and WebSocket subscriptions, ensuring that users receive notifications only for the specified coins.
 - The solution includes error handling for SMTP connection/authentication errors and WebSocket connection timeouts.
+
+## Coin Alert System - Database Model
+
+## User Table
+
+The `User` table is responsible for storing user information.
+
+### User Attributes
+
+- `id`: Integer, Primary Key
+- `username`: String (50 characters), Unique, Not Null
+- `password`: String (50 characters), Not Null
+- `email`: String (100 characters), Not Null
+
+## Alert Table
+
+The `Alert` table manages cryptocurrency alerts set by users.
+
+### Alert Attributes
+
+- `id`: Integer, Primary Key
+- `user_id`: Integer, Foreign Key (references User.id), Not Null
+- `coin`: String (10 characters), Not Null
+- `target_price`: Float, Not Null
+- `status`: String (20 characters), Default: 'created'
+
+The `status` field denotes the current state of the alert, with potential values including 'created,' 'deleted,' or 'triggered.'
+
+The `user_id` field establishes a foreign key relationship with the `id` field in the `User` table, connecting each alert to a specific user.
+
 
 ## Contribution 
 -Jeeban Bhagat is responsible for completion of the assignmnet. The assignment was completed as per the provided guidelines.
