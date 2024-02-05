@@ -282,7 +282,7 @@ Email notifications are sent using the SMTP (Simple Mail Transfer Protocol) with
 - **SMTP Server:** `smtp.office365.com`
 - **Port:** `587`
 - **Security:** `STARTTLS`
-- **Authentication:** The system logs in to the SMTP server using the credentials (`cointargetalert@outlook.com`, `Outlook99`).
+- **Authentication:** The system logs in to the SMTP server using the credentials (`cointargetalert@outlook.com`, `******`).
 
 ### Example Email Content
 
