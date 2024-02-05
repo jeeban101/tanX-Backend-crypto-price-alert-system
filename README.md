@@ -66,7 +66,7 @@ Once a user signs up or logs into the system, the following functionalities are 
 - **Description:** Fetches alerts for the authenticated user based on the specified status (e.g., created, deleted, triggered).
 
 # API Documentation
-These apis were successfully test using postman during development process. The database model dump file is uploaded for successfull composing of docker inorder to run this project.
+These apis were successfully testes using postman during development process. The database model dump file is uploaded for successfull composing of docker inorder to run this project.
 ## Endpoints
 
 ### 1. User Signup
