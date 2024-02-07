@@ -218,6 +218,17 @@ When the WebSocket receives real-time price updates for cryptocurrencies, it che
     by querying the alerts table. On fulfillment of alert, we update the database and for any changes on the
     subscription list (mainted as a dictionary) we unsubscribe and resubscribe to a new list of subscription.
 
+### Solution Explained as Pub-Sub:
+The described solution exhibits characteristics of a publish-subscribe (pub-sub) pattern. In a traditional pub-sub architecture:
+
+1. Publisher: Binance WebSocket acts as a publisher, continuously streaming real-time price updates for various cryptocurrencies.
+
+2. Subscribers: The application, specifically the on_message function, acts as a subscriber, subscribing to specific kline streams (channels) of interest.
+
+When an alert condition is met, the alert system in the application acts as a mechanism to "publish" this information to the users who have set up alerts. The users, in this context, are the "subscribers" who are interested in specific cryptocurrency price updates.
+
+The WebSocket communication, where the server (Binance WebSocket) sends messages to multiple clients (your application), aligns with the basic concept of pub-sub.
+
 ### Notification Workflow
 
 1. **WebSocket Handling:**
