@@ -5,7 +5,7 @@ This application allows users to set price alerts for cryptocurrencies. When the
 ## Getting Started
 
 ### Prerequisites
-- Docker
+- Docker 
 
 ### Steps to Run
 
@@ -19,7 +19,7 @@ This application allows users to set price alerts for cryptocurrencies. When the
 ```http://localhost:5000```
 
 ### Endpoints
-Once a user signs up or logs into the system, the following functionalities are implemented.
+Once a user signs up or logs into the system, the following functionalities are implemented:
 #### There are following things implemented using JWT token. 
 1. REST API endpoint for the user’s to create an alert `alerts/create/`
 2. REST API endpoint for the user’s to delete an alert `alerts/delete/`
